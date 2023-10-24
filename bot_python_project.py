@@ -2,10 +2,10 @@ import telebot
 import requests
 
 from datetime import datetime, timedelta
-# Вставьте ваш API токен, который вы получили от BotFather
+
 API_TOKEN = '6508905936:AAGA8M0d1nKSMjtc_ENHe_FbMqsTEr5-AoI'
 
-# Создайте объект бота
+
 bot = telebot.TeleBot(API_TOKEN)
 
 @bot.message_handler(commands=['start'])
@@ -79,14 +79,6 @@ def get_weather(message):
 
 
 
-
-
-def get_hse_news():
-    url = 'https://www.hse.ru/news/'
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    news = soup.find('div', class_='grid-list').find('a', class_='link-no-visited').text
-    return news
 
 # Обработчик команды "4 Новости"
 @bot.message_handler(func=lambda message: message.text == "4 Новости")
