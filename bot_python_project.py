@@ -7,7 +7,7 @@ API_TOKEN = '6508905936:AAGA8M0d1nKSMjtc_ENHe_FbMqsTEr5-AoI'
 
 
 bot = telebot.TeleBot(API_TOKEN)
-
+#Обрабатываем старт и создаем менюшку
 @bot.message_handler(commands=['start'])
 def start(message):
     markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -44,7 +44,7 @@ def send_time_until_new_year(message):
 
 
 
-
+#Про курс биткойна
 @bot.message_handler(func=lambda message: message.text == "2 Курс биткойна")
 def bitcoin_price(message):
     # Использую API для получения инфы  о курсе биткоина с сайта CoinGecko
@@ -53,11 +53,13 @@ def bitcoin_price(message):
     bitcoin_price_rub = data["bitcoin"]["rub"]
     bot.send_message(message.chat.id, f"Курс биткойна в рублях: {bitcoin_price_rub} рублей")
 
+#Погода
+#Функция по получению города где надо узнать какая погода
 @bot.message_handler(func=lambda message: message.text == "3 Погода")
 def weather(message):
     bot.send_message(message.chat.id, "Введите город:")
     bot.register_next_step_handler(message, get_weather)
-
+#Запрос погоды в указанном городе
 def get_weather(message):
     city = message.text
 
@@ -103,7 +105,7 @@ def send_hse_news(message):
 
 
 
-
+#Обработчик команды о создателе
 @bot.message_handler(func=lambda message: message.text == "5 Информация о создателе")
 def creator_info(message):
     bot.send_message(message.chat.id, "Этот бот был создан Рубекиным Егором Андреевичем группа БКНАД231.")
